@@ -195,12 +195,12 @@ use Vildanbina\LivewireWizard\Components\Step;
 
 class General extends Step
 {
-    public function onStepIn($name, $value)
+    public function onStepIn($newStep)
     {
         // Something you want
     }
 
-    public function onStepOut($name, $value)
+    public function onStepOut($oldStep)
     {
         // Something you want
     }

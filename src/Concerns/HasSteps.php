@@ -39,11 +39,11 @@ trait HasSteps
             $this->stepsValidation($this->prevStep($step));
         }
 
-        $this->getCurrentStep()->callHook('onStepOut');
+        $this->getCurrentStep()->callHook('onStepOut', $this->activeStep);
 
         $this->activeStep = $step;
 
-        $this->getCurrentStep()->callHook('onStepIn');
+        $this->getCurrentStep()->callHook('onStepIn', $step);
 
         $this->callHook('afterSetStep', $this->activeStep, $step);
     }
