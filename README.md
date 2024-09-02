@@ -1,8 +1,8 @@
-[![Latest Stable Version](http://poser.pugx.org/vildanbina/livewire-wizard/v)](https://packagist.org/packages/vildanbina/livewire-wizard)
-[![Total Downloads](http://poser.pugx.org/vildanbina/livewire-wizard/downloads)](https://packagist.org/packages/vildanbina/livewire-wizard)
-[![Latest Unstable Version](http://poser.pugx.org/vildanbina/livewire-wizard/v/unstable)](https://packagist.org/packages/vildanbina/livewire-wizard)
-[![License](http://poser.pugx.org/vildanbina/livewire-wizard/license)](https://packagist.org/packages/vildanbina/livewire-wizard)
-[![PHP Version Require](http://poser.pugx.org/vildanbina/livewire-wizard/require/php)](https://packagist.org/packages/vildanbina/livewire-wizard)
+[![Latest Stable Version](https://poser.pugx.org/vildanbina/livewire-wizard/v)](https://packagist.org/packages/vildanbina/livewire-wizard)
+[![Total Downloads](https://poser.pugx.org/vildanbina/livewire-wizard/downloads)](https://packagist.org/packages/vildanbina/livewire-wizard)
+[![Latest Unstable Version](https://poser.pugx.org/vildanbina/livewire-wizard/v/unstable)](https://packagist.org/packages/vildanbina/livewire-wizard)
+[![License](https://poser.pugx.org/vildanbina/livewire-wizard/license)](https://packagist.org/packages/vildanbina/livewire-wizard)
+[![PHP Version Require](https://poser.pugx.org/vildanbina/livewire-wizard/require/php)](https://packagist.org/packages/vildanbina/livewire-wizard)
 
 A dynamic Laravel Livewire component for multi steps form.
 
