@@ -6,13 +6,13 @@ use Closure;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 use Livewire\Component;
 use Skuads\LivewireWizard\Components\Step;
 use Skuads\LivewireWizard\Concerns\HasHooks;
 use Skuads\LivewireWizard\Concerns\HasState;
 use Skuads\LivewireWizard\Concerns\HasSteps;
 use Skuads\LivewireWizard\Contracts\WizardForm;
-use Str;
 
 abstract class WizardComponent extends Component implements WizardForm
 {

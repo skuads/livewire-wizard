@@ -2,6 +2,4 @@
 
 namespace Skuads\LivewireWizard\Contracts;
 
-interface WizardForm
-{
-}
+interface WizardForm {}

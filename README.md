@@ -12,7 +12,7 @@ A dynamic Laravel Livewire component for multi steps form.
 
 You can install the package via composer:
 
-``` bash
+```bash
 composer require vildanbina/livewire-wizard
 ```
 
@@ -24,7 +24,10 @@ Livewire Wizard requires [Alpine](https://github.com/alpinejs/alpine). You can u
 
 ```html
 <!-- Alpine v2 -->
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script
+  src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+  defer
+></script>
 
 <!-- Alpine v3 -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -49,16 +52,16 @@ You can create livewire component `php artisan make:livewire UserWizard` to make
 
 namespace App\Livewire;
 
-use Vildanbina\LivewireWizard\WizardComponent;
+use Skuads\LivewireWizard\WizardComponent;
 use App\Models\User;
 
 class UserWizard extends WizardComponent
 {
     // My custom class property
     public $userId;
-    
+
     /*
-     * Will return App\Models\User instance or will create empty User (based on $userId parameter) 
+     * Will return App\Models\User instance or will create empty User (based on $userId parameter)
      */
     public function model()
     {
@@ -69,8 +72,8 @@ class UserWizard extends WizardComponent
 
 When you need to display wizard form, based on above example we need to pass `$userId` value and to display wizard form:
 
-```html 
-<livewire:user-wizard user-id="3"/>
+```html
+<livewire:user-wizard user-id="3" />
 ```
 
 Or when you want to create new user, let blank `user-id` attribute, or don't put that.
@@ -114,12 +117,12 @@ You can create wizard form step. Open or create your step class (at `App\Steps` 
 
 namespace App\Steps;
 
-use Vildanbina\LivewireWizard\Components\Step;
+use Skuads\LivewireWizard\Components\Step;
 use Illuminate\Validation\Rule;
 
 class General extends Step
 {
-    // Step view located at resources/views/steps/general.blade.php 
+    // Step view located at resources/views/steps/general.blade.php
     protected string $view = 'steps.general';
 
     /*
@@ -132,9 +135,9 @@ class General extends Step
             'email'                 => $this->model->email,
         ]);
     }
-    
+
     /*
-    * Step icon 
+    * Step icon
     */
     public function icon(): string
     {
@@ -150,7 +153,7 @@ class General extends Step
 
         $user->name     = $state['name'];
         $user->email    = $state['email'];
-        
+
         $user->save();
     }
 
@@ -184,14 +187,10 @@ class General extends Step
 
 **Note:** Remember to use the prefix `state.` in the `wire:model` attribute in views, for example: `wire:model="state.name"`
 
-
-
-
-
 In Step class, you can use livewire hooks example:
 
 ```php
-use Vildanbina\LivewireWizard\Components\Step;
+use Skuads\LivewireWizard\Components\Step;
 
 class General extends Step
 {
@@ -214,7 +213,7 @@ class General extends Step
     {
         // Something you want
     }
-    
+
     public function updated($name, $value)
     {
         // Something you want
@@ -237,7 +236,7 @@ After create step class, you need to put that step to wizard form:
 namespace App\Livewire;
 
 use App\Steps\General;
-use Vildanbina\LivewireWizard\WizardComponent;
+use Skuads\LivewireWizard\WizardComponent;
 
 class UserWizard extends WizardComponent
 {
@@ -245,7 +244,7 @@ class UserWizard extends WizardComponent
         General::class,
         // Other steps...
     ];
-   
+
     ...
 }
 ```
@@ -256,24 +255,19 @@ Because some classes are dynamically build and to compile js you should add some
 
 ```js
 module.exports = {
-    presets: [
-        require("./vendor/wireui/wireui/tailwind.config.js")
-    ],
-    content: [
-        "./resources/**/*.blade.php",
-        "./resources/**/*.js",
-        "./resources/**/*.vue",
+  presets: [require("./vendor/wireui/wireui/tailwind.config.js")],
+  content: [
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.vue",
 
-        "./vendor/vildanbina/livewire-wizard/resources/views/*.blade.php",
-        "./vendor/wireui/wireui/resources/**/*.blade.php",
-        "./vendor/wireui/wireui/ts/**/*.ts",
-        "./vendor/wireui/wireui/src/View/**/*.php"
-    ],
-    plugins: [
-        require("@tailwindcss/forms"),
-    ],
+    "./vendor/vildanbina/livewire-wizard/resources/views/*.blade.php",
+    "./vendor/wireui/wireui/resources/**/*.blade.php",
+    "./vendor/wireui/wireui/ts/**/*.ts",
+    "./vendor/wireui/wireui/src/View/**/*.php",
+  ],
+  plugins: [require("@tailwindcss/forms")],
 };
-
 ```
 
 If you haven't installed `tailwindcss/forms` plugin, install it: `npm install -D @tailwindcss/forms`
