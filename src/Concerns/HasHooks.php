@@ -1,12 +1,12 @@
 <?php
 
-namespace Vildanbina\LivewireWizard\Concerns;
+namespace Skuads\LivewireWizard\Concerns;
 
 trait HasHooks
 {
     public function callHook(string $hook, ...$args): void
     {
-        if (!method_exists($this, $hook)) {
+        if (! method_exists($this, $hook)) {
             return;
         }
 

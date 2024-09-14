@@ -1,5 +1,5 @@
 {
-  "name": "vildanbina/livewire-wizard-beta",
+  "name": "skuads/livewire-wizard-beta",
   "description": "Laravel Livewire Wizard (Multi-Step Form) component",
   "keywords": [
     "laravel",
@@ -24,7 +24,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Vildanbina\\LivewireWizard\\": "src"
+      "Skuads\\LivewireWizard\\": "src"
     }
   },
   "extra": {

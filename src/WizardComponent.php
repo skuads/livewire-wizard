@@ -1,30 +1,33 @@
 <?php
 
-namespace Vildanbina\LivewireWizard;
+namespace Skuads\LivewireWizard;
 
 use Closure;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
+use Skuads\LivewireWizard\Components\Step;
+use Skuads\LivewireWizard\Concerns\HasHooks;
+use Skuads\LivewireWizard\Concerns\HasState;
+use Skuads\LivewireWizard\Concerns\HasSteps;
+use Skuads\LivewireWizard\Contracts\WizardForm;
 use Str;
-use Vildanbina\LivewireWizard\Components\Step;
-use Vildanbina\LivewireWizard\Concerns\HasHooks;
-use Vildanbina\LivewireWizard\Concerns\HasState;
-use Vildanbina\LivewireWizard\Concerns\HasSteps;
-use Vildanbina\LivewireWizard\Contracts\WizardForm;
 
 abstract class WizardComponent extends Component implements WizardForm
 {
-    use HasSteps;
     use HasHooks;
     use HasState;
+    use HasSteps;
 
     public bool $saveStepState = true;
+
     public null|array|Model $model = null;
+
     protected array $cachedSteps = [];
 
     protected $queryString = [];
+
     public function resetForm(): void
     {
         $this->callHook('beforeResetForm');
@@ -53,16 +56,16 @@ abstract class WizardComponent extends Component implements WizardForm
         }
 
         $this->stepClasses(function (Step $step) {
-            
+
             if (method_exists($this, 'model')) {
                 $step->setModel($this->model);
             }
-            
+
             if (method_exists($step, 'mount')) {
                 $step->mount();
             }
 
-            if ($step->getOrder() < $this->activeStep && !$step->isValid()) {
+            if ($step->getOrder() < $this->activeStep && ! $step->isValid()) {
                 $this->setStep($step->getOrder());
             }
         });
@@ -70,18 +73,18 @@ abstract class WizardComponent extends Component implements WizardForm
         $this->callHook('afterMount', ...func_get_args());
     }
 
-    protected function stepClasses(null|Closure $callback = null): array
+    protected function stepClasses(?Closure $callback = null): array
     {
 
         if (filled($this->cachedSteps)) {
             return collect($this->cachedSteps)
-                ->each(fn(Step $step, $index) => value($callback, $step, $index))
+                ->each(fn (Step $step, $index) => value($callback, $step, $index))
                 ->toArray();
         }
 
         if (filled($this->steps())) {
             $this->cachedSteps = collect($this->steps())
-                ->map(function ($step, $index) use ($callback) {
+                ->map(function ($step, $index) {
                     if (class_exists($step) && is_subclass_of($step, Step::class)) {
                         $stepInstance = $step::make($this);
 
@@ -91,6 +94,7 @@ abstract class WizardComponent extends Component implements WizardForm
 
                         return $stepInstance;
                     }
+
                     return null;
                 })
                 ->filter()
@@ -119,16 +123,16 @@ abstract class WizardComponent extends Component implements WizardForm
     private function callHooksStep($hook, $name, $value): void
     {
         $stepInstance = $this->getCurrentStep();
-        $name         = Str::of($name);
+        $name = Str::of($name);
 
-        $propertyName     = $name->studly()->before('.');
+        $propertyName = $name->studly()->before('.');
         $keyAfterFirstDot = $name->contains('.') ? $name->after('.')->__toString() : null;
-        $keyAfterLastDot  = $name->contains('.') ? $name->afterLast('.')->__toString() : null;
+        $keyAfterLastDot = $name->contains('.') ? $name->afterLast('.')->__toString() : null;
 
-        $beforeMethod = $hook . $propertyName;
+        $beforeMethod = $hook.$propertyName;
 
         $beforeNestedMethod = $name->contains('.')
-            ? $hook . $name->replace('.', '_')->studly()
+            ? $hook.$name->replace('.', '_')->studly()
             : false;
 
         $stepInstance->callHook($beforeMethod, $value, $keyAfterFirstDot);
@@ -145,8 +149,8 @@ abstract class WizardComponent extends Component implements WizardForm
 
     public function getStepInstance($step): ?Step
     {
-        if (($stepInstance = data_get($this->stepClasses(), $step)) && !$stepInstance instanceof Step) {
-            throw new Exception(get_class($stepInstance) . ' must bee ' . Step::class . ' instance');
+        if (($stepInstance = data_get($this->stepClasses(), $step)) && ! $stepInstance instanceof Step) {
+            throw new Exception(get_class($stepInstance).' must bee '.Step::class.' instance');
         }
 
         return $stepInstance;
@@ -187,10 +191,10 @@ abstract class WizardComponent extends Component implements WizardForm
 
             if (method_exists($stepInstance, 'validate') && $stepInstance->getOrder() <= $step) {
                 $stepValidate = $stepInstance->validate();
-                $stepInstance->validationFails = !$stepInstance->isValid();
+                $stepInstance->validationFails = ! $stepInstance->isValid();
 
-                $rules      = array_merge($rules, $stepValidate[0] ?? []);
-                $messages   = array_merge($messages, $stepValidate[1] ?? []);
+                $rules = array_merge($rules, $stepValidate[0] ?? []);
+                $messages = array_merge($messages, $stepValidate[1] ?? []);
                 $attributes = array_merge($attributes, $stepValidate[2] ?? []);
             }
         });

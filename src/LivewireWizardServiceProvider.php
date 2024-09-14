@@ -1,6 +1,6 @@
 <?php
 
-namespace Vildanbina\LivewireWizard;
+namespace Skuads\LivewireWizard;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
