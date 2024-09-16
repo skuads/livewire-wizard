@@ -33,6 +33,7 @@ abstract class WizardComponent extends Component implements WizardForm
         $this->callHook('beforeResetForm');
 
         $this->setStep(array_key_first($this->steps()));
+
         $this->mount();
 
         $this->callHook('afterResetForm');
@@ -212,6 +213,7 @@ abstract class WizardComponent extends Component implements WizardForm
     public function render(): View
     {
         return view('livewire-wizard::wizard', [
+            'currentStep' => $this->getCurrentStep(),
             'stepInstances' => $this->stepClasses(),
         ]);
     }
