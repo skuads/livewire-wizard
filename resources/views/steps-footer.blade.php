@@ -1,10 +1,16 @@
 <div class="p-2 flex flex-row-reverse justify-between">
     @if($this->hasNextStep())
-        <x-button lg primary  right-icon="chevron-right" wire:click="goToNextStep" spinner="goToNextStep" :label="__('Next')"/>
+    <button wire:click="goToNextStep" spinner="goToNextStep">
+        {{ __('Next') }} &raquo;
+    </button>
     @else
-        <x-button lg primary type="submit" spinner="submit" :label="__('Submit')"/>
+    <button type="submit">
+        {{ __('Submit') }}
+    </button>
     @endif
     @if($this->hasPrevStep())
-        <x-button lg dark :label="__('Back')" icon="chevron-left" wire:click="goToPrevStep" spinner="goToPrevStep"/>
+    <button wire:click="goToPrevStep" spinner="goToPrevStep">
+        &laquo; {{ __('Back') }}
+    </button>
     @endif
 </div>
