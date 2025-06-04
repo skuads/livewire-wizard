@@ -2,7 +2,7 @@
 
 namespace Skuads\LivewireWizard\Concerns;
 
-use Arr;
+use Illuminate\Support\Arr;
 use Livewire\Attributes\Url;
 
 trait HasSteps
