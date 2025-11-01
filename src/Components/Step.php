@@ -23,6 +23,8 @@ abstract class Step extends ViewComponent implements Htmlable
 
     public bool $validationFails = false;
 
+    protected bool $showWizardFooter = true;
+
     public function __construct(WizardForm $livewire)
     {
         $this
@@ -50,6 +52,11 @@ abstract class Step extends ViewComponent implements Htmlable
     public function icon(): string
     {
         return 'check';
+    }
+
+    public function showWizardFooter(): bool
+    {
+        return $this->showWizardFooter;
     }
 
     public function isValid(): bool
